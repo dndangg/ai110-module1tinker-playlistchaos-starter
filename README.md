@@ -114,6 +114,38 @@ When you finish, Playlist Chaos will feel more predictable, and you will have ta
 
 ---
 
+## Changes Made to the Code
+
+### Bug Fixes
+
+#### 1. Fixed `hype_ratio` calculation in `compute_playlist_stats`
+- **Location**: `playlist_logic.py`, line ~121
+- **Issue**: The ratio was calculated as `len(hype) / len(hype)`, always returning 1.0 or 0.0
+- **Fix**: Changed to `len(hype) / len(all_songs)` to calculate the actual proportion of hype songs
+- **Impact**: The hype ratio now correctly shows what percentage of all songs are classified as hype
+
+#### 2. Fixed `avg_energy` calculation in `compute_playlist_stats`
+- **Location**: `playlist_logic.py`, line ~127
+- **Issue**: Summed energy from only hype songs but divided by total song count, mixing two different populations
+- **Fix**: Changed to sum energy from all songs: `sum(song.get("energy", 0) for song in all_songs)`
+- **Impact**: Average energy now correctly represents the average across the entire playlist
+
+### Refactoring
+
+#### 3. Refactored `classify_song` function for readability
+- **Location**: `playlist_logic.py`, lines 62-90
+- **Changes**:
+  - Renamed `is_hype_keyword` → `has_hype_genre_keyword` (clarifies it checks genre field)
+  - Renamed `is_chill_keyword` → `has_chill_title_keyword` (clarifies it checks title field)
+  - Extracted inline comparisons into named boolean variables:
+    - `is_favorite_genre = genre == favorite_genre`
+    - `is_high_energy = energy >= hype_min_energy`
+    - `is_low_energy = energy <= chill_max_energy`
+  - Added explanatory comments for classification logic
+- **Impact**: No functional changes, but code is now more self-documenting and easier to understand
+
+---
+
 ## Summary
 
 The core concept students need to understand is that debugging involves investigating code behavior and using AI as a collaborator instead of an all knowing oracle. Students are most likely to struggle with distinguishing real bugs from code that does work, but may look confusing. They may also struggle with critically evaluating AI suggestions instead of simply accepting them. AI assistants can be helpful for explaining what code does and identifying math errors, but can be misleading by suggesting fixes for code that's already working as designed. That could lead to unintended changes. When guiding students, it would be helpful to ask them to trace through examples manually and explain what they expect to happen versus what actually happens, and encourage them to verify AI suggestions through testing rather than automatically trusting them. This  builds debugging skills and helps with critical thinking about AI development.

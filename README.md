@@ -111,3 +111,9 @@ If you finish early or want an extra challenge, try one of these:
 - Stay curious. The unpredictability is intentional and part of the experience.
 
 When you finish, Playlist Chaos will feel more predictable, and you will have taken your first steps into AI-assisted debugging.
+
+---
+
+## Summary
+
+The core concept students need to understand is that debugging involves investigating code behavior and using AI as a collaborator instead of an all knowing oracle. Students are most likely to struggle with distinguishing real bugs from code that does work, but may look confusing. They may also struggle with critically evaluating AI suggestions instead of simply accepting them. AI assistants can be helpful for explaining what code does and identifying math errors, but can be misleading by suggesting fixes for code that's already working as designed. That could lead to unintended changes. When guiding students, it would be helpful to ask them to trace through examples manually and explain what they expect to happen versus what actually happens, and encourage them to verify AI suggestions through testing rather than automatically trusting them. This  builds debugging skills and helps with critical thinking about AI development.
